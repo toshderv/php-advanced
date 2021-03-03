@@ -1,3 +1,3 @@
 <?php
-$qwe = 1;
-phpinfo();
+
+echo 'Hello world!';
