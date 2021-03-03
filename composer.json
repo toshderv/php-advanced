@@ -1,0 +1,21 @@
+{
+    "name": "toshderv/analyze-response",
+    "description": "Analyze response",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "toshderv",
+            "email": "toshderv@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "AnalyzeResponse\\": "src/"
+        }
+    },
+    "require": {
+        "guzzlehttp/guzzle": "^7"
+    },
+    "minimum-stability": "dev"
+}
