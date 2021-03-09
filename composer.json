@@ -1,7 +1,6 @@
 {
-    "name": "toshderv/analyze-response",
-    "description": "Analyze response",
-    "type": "library",
+    "name": "toshderv/oop-exceptions",
+    "description": "Lesson - 3. Home work.",
     "license": "MIT",
     "authors": [
         {
@@ -11,11 +10,9 @@
     ],
     "autoload": {
         "psr-4": {
-            "AnalyzeResponse\\": "src/"
+            "App\\": "app/"
         }
     },
-    "require": {
-        "guzzlehttp/guzzle": "^7"
-    },
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "require": {}
 }

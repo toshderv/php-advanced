@@ -1,8 +1,5 @@
 <?php
 
-use AnalyzeResponse\AnswerOutput;
-use AnalyzeResponse\ViewConstructor;
-
 /*
 |--------------------------------------------------------------------------
 | Register The Auto Loader
@@ -14,16 +11,21 @@ use AnalyzeResponse\ViewConstructor;
 |
 */
 
-require __DIR__.'/vendor/autoload.php';
+require_once __DIR__.'/vendor/autoload.php';
 
-$answerOutput = new AnswerOutput('https://itea.ua');
-$answerOutput->setMethod('GET');
-$answerOutput->setUri('/');
-$response = $answerOutput->getResponse();
+use App\Cars\Lada;
+use App\Cars\Tesla;
 
-$viewConstructor = new ViewConstructor($response);
+$lada = new Lada();
+$lada->start();
+$lada->up(random_int(50, 300));
+$lada->down(random_int(0, 70));
+$lada->stop();
 
-/*
- * View
- */
-echo $viewConstructor->getData();
+echo '<hr>';
+
+$tesla = new Tesla();
+$tesla->start();
+$tesla->up(random_int(50, 300));
+$tesla->down(random_int(0, 70));
+$tesla->stop();
