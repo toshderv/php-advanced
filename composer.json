@@ -1,6 +1,7 @@
 {
-    "name": "toshderv/oop-exceptions",
-    "description": "Lesson - 3. Home work.",
+    "name": "toshderv/mvc",
+    "description": "Custom MVC project",
+    "type": "project",
     "license": "MIT",
     "authors": [
         {
@@ -10,6 +11,7 @@
     ],
     "autoload": {
         "psr-4": {
+            "Core\\": "core/",
             "App\\": "app/"
         }
     },

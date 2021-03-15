@@ -1,5 +1,7 @@
 <?php
 
+use Core\Application;
+
 /*
 |--------------------------------------------------------------------------
 | Register The Auto Loader
@@ -11,21 +13,7 @@
 |
 */
 
-require_once __DIR__.'/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
-use App\Cars\Lada;
-use App\Cars\Tesla;
-
-$lada = new Lada();
-$lada->start();
-$lada->up(random_int(50, 300));
-$lada->down(random_int(0, 70));
-$lada->stop();
-
-echo '<hr>';
-
-$tesla = new Tesla();
-$tesla->start();
-$tesla->up(random_int(50, 300));
-$tesla->down(random_int(0, 70));
-$tesla->stop();
+$instance = Application::getInstance();
+echo $instance->run();
