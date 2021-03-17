@@ -1,19 +1,20 @@
 <?php
 
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
+/**
+ * Точка входа приложения
+ */
+
+
 use Core\Application;
 
-/*
-|--------------------------------------------------------------------------
-| Register The Auto Loader
-|--------------------------------------------------------------------------
-|
-| Composer provides a convenient, automatically generated class loader for
-| this application. We just need to utilize it! We'll simply require it
-| into the script here so we don't need to manually load our classes.
-|
-*/
+require_once '../vendor/autoload.php';
 
-require __DIR__ . '/../vendor/autoload.php';
 
-$instance = Application::getInstance();
-echo $instance->run();
+$config = include '../config/config.php';
+
+$app = Application::getInstance();
+$app->initialize($config);
+$app->run();
