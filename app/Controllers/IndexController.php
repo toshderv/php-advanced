@@ -4,6 +4,8 @@
 namespace App\Controllers;
 
 
+use App\Services\Routing\Router;
+
 /**
  * Class IndexController
  * Пример контроллера
@@ -12,9 +14,9 @@ namespace App\Controllers;
  */
 class IndexController
 {
-    public function index($name, $var)
+    public function index()
     {
-        echo 'Run index method index controller with params name, var: ' . $name . ' - ' . $var;
+        echo 'Run index method index controller';
     }
 
     public function user()

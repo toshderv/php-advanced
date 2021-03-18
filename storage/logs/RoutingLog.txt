@@ -1,0 +1,33 @@
+2021-03-18 23:02:43 Level: error - Can not define route
+###### TRACE 0: ######
+In line: 129
+In File: /var/www/toshderv.xyz/core/Application.php
+###### END TRACE 0 ######
+###### TRACE 1: ######
+In line: 15
+In File: /var/www/toshderv.xyz/public/index.php
+###### END TRACE 1 ######
+
+
+2021-03-18 23:02:46 Level: error - Can not define route
+###### TRACE 0: ######
+In line: 129
+In File: /var/www/toshderv.xyz/core/Application.php
+###### END TRACE 0 ######
+###### TRACE 1: ######
+In line: 15
+In File: /var/www/toshderv.xyz/public/index.php
+###### END TRACE 1 ######
+
+
+2021-03-18 23:02:52 Level: error - Can not define route
+###### TRACE 0: ######
+In line: 129
+In File: /var/www/toshderv.xyz/core/Application.php
+###### END TRACE 0 ######
+###### TRACE 1: ######
+In line: 15
+In File: /var/www/toshderv.xyz/public/index.php
+###### END TRACE 1 ######
+
+

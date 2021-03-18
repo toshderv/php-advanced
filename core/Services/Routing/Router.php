@@ -4,6 +4,7 @@
 namespace Core\Services\Routing;
 
 
+use App\Services\Logger\Logger;
 use Core\Contracts\RouterInterface;
 
 /**
@@ -14,8 +15,6 @@ use Core\Contracts\RouterInterface;
  */
 class Router implements RouterInterface
 {
-    protected const PATH_CONTROLLERS = 'App\Controllers';
-
     /**
      * @var array массив сконфигурированных роутов
      */
@@ -36,29 +35,14 @@ class Router implements RouterInterface
     }
 
     /**
-     * @param string $action
-     * @return array
-     */
-    private function parseControllerMethod(string $action): array
-    {
-        $arr = [];
-        $segments = explode('@', $action);
-        $arr['controller'] = self::PATH_CONTROLLERS . '\\' . $segments[0];
-        $arr['action'] = $segments[1];
-
-        return $arr;
-    }
-
-    /**
      * Метод добавляет роут
      *
      * @param string $method
      * @param string $path
-     * @param callable|string $action
+     * @param string $action
      */
-    public function addRoute(string $method, string $path, callable|string $action)
+    public function addRoute(string $method, string $path, callable $action)
     {
-        $path = trim($path, '/');
         $this->routes[$method][$path] = $action;
     }
 
@@ -70,34 +54,22 @@ class Router implements RouterInterface
      */
     public function route(): callable
     {
+        // Получаем метод и путь запроса и проверяем есть ли для него сконфигурированный роут
         $method = $_SERVER['REQUEST_METHOD'];
-        $path = parse_url(trim($_SERVER['REQUEST_URI'], '/'), PHP_URL_PATH);
-        $paramString = parse_url(trim($_SERVER['REQUEST_URI'], '/'), PHP_URL_QUERY);
-        $paramArr = explode('&', $paramString);
-        $params = [];
-        foreach ($paramArr as $value) {
-            list($k, $v) = explode('=', $value);
-            $params[$k] = $v;
-        }
-
+        $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         $action = $this->routes[$method][$path] ?? null;
-
+        // Если роут есть, возвращаем колбек функцию, вызывающию соответствующий роут
         if ($action && is_callable($action)) {
-            return function () use ($method, $path) {
+            return function() use ($method, $path) {
                 return $this->routes[$method][$path]();
             };
-        } elseif ($action && is_string($action) && $action !== '') {
-            $methodOfController = $this->parseControllerMethod($action);
-            $reflectionMethod = new \ReflectionMethod($methodOfController['controller'], $methodOfController['action']);
-            $methodParams = $reflectionMethod->getParameters();
-            $args = [];
-            foreach ($methodParams as $methodParam) {
-                $args[] = $params[$methodParam->name] ?? throw new \Exception('Can not required param: ' . $methodParam->name);
-            }
+        }
 
-            return function () use ($reflectionMethod, $methodOfController, $args) {
-                $reflectionMethod->invokeArgs(new $methodOfController['controller'](), $args);
-            };
+        try {
+            throw new \Exception('Can not define route');
+        } catch (\Exception $exception) {
+            $logger = new Logger();
+            $logger->error($exception->getMessage(), $exception->getTrace());
         }
 
         throw new \Exception('Can not define route');

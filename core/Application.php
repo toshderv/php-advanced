@@ -20,27 +20,27 @@ class Application implements RunableInterface, ContainerInterface
     /**
      * @var Application инстанс приложения (singleton)
      */
-    protected static ?Application $instance = null;
+    protected static $instance;
 
     /**
      * @var array Массив приязок названий севрисов и фабрик, которые умеют их создавать
      */
-    protected array $bindings = [];
+    protected $bingings = [];
 
     /**
      * @var array Массив уже созданных инстансов.
      * Сервисы в него добавляются при первом обращении к ним. Впоследствии новые экземляры не создаются, а берутся отсюда
      */
-    protected array $services = [];
+    protected $services = [];
 
     /**
      * Статический метод для получения экземпляра приложения (singleton).
      * Нужен для того, чтобы можно было получить сервис из него в любом месте кода.
      * Не самая лучшая реализация. Но мы это исправим в дальнейшем
      *
-     * @return Application|null
+     * @return Application
      */
-    public static function getInstance(): ?Application
+    public static function getInstance()
     {
         if (self::$instance === null) {
             self::$instance = new self();
@@ -71,7 +71,7 @@ class Application implements RunableInterface, ContainerInterface
                     throw new \Exception('Can not create factory');
                 }
 
-                $this->bindings[$name] = $factory;
+                $this->bingings[$name] = $factory;
             }
         }
     }
@@ -91,8 +91,8 @@ class Application implements RunableInterface, ContainerInterface
             return $this->services[$name];
         }
 
-        if (array_key_exists($name, $this->bindings)) {
-            $factory = $this->bindings[$name];
+        if (array_key_exists($name, $this->bingings)) {
+            $factory = $this->bingings[$name];
             $factory = new $factory();
             $instance = $factory->createInstance();
             $this->services[$name] = $instance;
