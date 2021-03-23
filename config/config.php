@@ -4,8 +4,7 @@ use App\Services\Cache\Cache;
 use App\Services\Cache\CacheFactory;
 use Core\Contracts\RouterInterface;
 use Core\Services\Routing\RouterFactory;
-use App\Services\Logger\Logger;
-use App\Services\Logger\LoggerFactory;
+use Logging\LoggerFactory;
 
 // Для того чтобы подменить реализацию роутинга, например, можно указать другую фабрику
 // Соответствено новый роутер должен реализовать соответствующий интерфейс
@@ -18,7 +17,17 @@ return [
     // Массив привязок названий сервисов и фабрик, которые умеют их создавать
     'services' => [
         Cache::class => CacheFactory::class,
-        RouterInterface::class => RouterFactory::class,
-        Logger::class => LoggerFactory::class,
+        'router' => [
+            'factory' => RouterFactory::class,
+        ],
+        \Logging\Logger::class => LoggerFactory::class,
+        \Core\Services\Database\Db::class => [
+            'factory' => \Core\Services\Database\DbFactory::class,
+            'options' => [
+                'dsn' => 'mysql:dbname=itea;host=127.0.0.1',
+                'user' => 'root',
+                'password' => 'TBk3GGfzus3!NTy'
+            ]
+        ]
     ],
 ];

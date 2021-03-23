@@ -4,7 +4,6 @@
 namespace Core\Services\Routing;
 
 
-use App\Services\Logger\Logger;
 use Core\Contracts\RouterInterface;
 
 /**
@@ -63,13 +62,6 @@ class Router implements RouterInterface
             return function() use ($method, $path) {
                 return $this->routes[$method][$path]();
             };
-        }
-
-        try {
-            throw new \Exception('Can not define route');
-        } catch (\Exception $exception) {
-            $logger = new Logger();
-            $logger->error($exception->getMessage(), $exception->getTrace());
         }
 
         throw new \Exception('Can not define route');

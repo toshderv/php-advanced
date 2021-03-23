@@ -1,0 +1,24 @@
+{
+    "name": "aigletter/mvc-project",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "aigletter",
+            "email": "aigletter@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "psr/log": "^1.1@dev",
+        "ext-pdo": "*"
+    },
+    "description": "",
+    "autoload": {
+        "psr-4": {
+            "Core\\": "core",
+            "App\\": "app",
+            "Logging\\": "core/Services/Logging"
+        }
+    }
+}
