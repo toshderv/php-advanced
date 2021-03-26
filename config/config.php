@@ -24,9 +24,9 @@ return [
         \Core\Services\Database\Db::class => [
             'factory' => \Core\Services\Database\DbFactory::class,
             'options' => [
-                'dsn' => 'mysql:dbname=itea;host=127.0.0.1',
+                'dsn' => 'mysql:dbname=examples;host=127.0.0.1',
                 'user' => 'root',
-                'password' => 'TBk3GGfzus3!NTy'
+                'password' => '1q2w3e'
             ]
         ]
     ],

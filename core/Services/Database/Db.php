@@ -10,6 +10,7 @@ class Db
 
     public function __construct($dsn, $user, $password)
     {
+        // mysql:dbname=testdb;host=127.0.0.1
         $this->pdo = new \PDO($dsn, $user, $password);
     }
 

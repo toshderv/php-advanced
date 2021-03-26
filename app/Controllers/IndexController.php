@@ -24,14 +24,9 @@ class IndexController
         $logger->debug('Start index method');
 
         $db = Application::getInstance()->get(Db::class);
+        $db->query();
 
-        $sql = new Query('query');
-        $sql->select(['id', 'title', 'created_at']);
-        $sql->where(['id', '>=', 5]);
-
-        $result = $db->query($sql);
-
-        var_dump($result);
+        echo 'Run index method index controller';
     }
 
     public function user()
