@@ -17,7 +17,7 @@ class Router implements RouterInterface
     /**
      * @var array массив сконфигурированных роутов
      */
-    protected $routes = [];
+    protected array $routes = [];
 
     /**
      * Router constructor.
@@ -38,9 +38,9 @@ class Router implements RouterInterface
      *
      * @param string $method
      * @param string $path
-     * @param string $action
+     * @param callable|array $action
      */
-    public function addRoute(string $method, string $path, callable $action)
+    public function addRoute(string $method, string $path, callable|array $action)
     {
         $this->routes[$method][$path] = $action;
     }

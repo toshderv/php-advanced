@@ -12,5 +12,8 @@ namespace Core\Contracts;
  */
 interface RunableInterface
 {
+    /**
+     * @return mixed
+     */
     public function run();
 }

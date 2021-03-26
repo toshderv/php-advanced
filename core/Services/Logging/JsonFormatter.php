@@ -7,6 +7,9 @@ namespace Logging;
 class JsonFormatter implements FormatterInterface
 {
 
+    /**
+     * @inheritDoc
+     */
     public function format(string $level, string $message, array $context = []): string
     {
         $log = [

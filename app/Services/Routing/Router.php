@@ -15,6 +15,10 @@ use Core\Contracts\RouterInterface;
  */
 class Router implements RouterInterface
 {
+    /**
+     * @return callable
+     * @throws \Exception
+     */
     public function route(): callable
     {
         if (parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) === '/') {

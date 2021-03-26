@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Controllers;
-
 
 use App\Services\Routing\Router;
 use Core\Application;
@@ -18,18 +16,32 @@ use Logging\Logger;
  */
 class IndexController
 {
-    public function index()
+    /**
+     * Index method
+     *
+     * Default method of IndexController
+     *
+     * @throws \Exception
+     */
+    public function index(): void
     {
+        /** @var TYPE_NAME $logger */
         $logger = Application::getInstance()->get(Logger::class);
         $logger->debug('Start index method');
 
+
+        /** @var Db $db */
         $db = Application::getInstance()->get(Db::class);
         $db->query();
 
         echo 'Run index method index controller';
     }
 
-    public function user()
+
+    /**
+     * User method
+     */
+    public function user(): void
     {
         echo 'User method';
     }

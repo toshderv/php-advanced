@@ -15,6 +15,9 @@ use Core\Application;
  */
 class Invokable
 {
+    /**
+     * @throws \Exception
+     */
     public function __invoke()
     {
         // Пример получения экземпляра сервиса из контейнера
