@@ -26,13 +26,13 @@ class Application implements RunableInterface, ContainerInterface
     /**
      * @var array Массив приязок названий севрисов и фабрик, которые умеют их создавать
      */
-    protected $bindings = [];
+    protected array $bindings = [];
 
     /**
-     * @var array Массив уже созданных инстансов.
+     * @var array $services Массив уже созданных инстансов.
      * Сервисы в него добавляются при первом обращении к ним. Впоследствии новые экземляры не создаются, а берутся отсюда
      */
-    protected $services = [];
+    protected array $services = [];
 
     /**
      * Статический метод для получения экземпляра приложения (singleton).
@@ -84,9 +84,10 @@ class Application implements RunableInterface, ContainerInterface
      *
      * @param $name
      *
-     * @return mixed|null
+     * @return mixed
+     * @throws \Exception
      */
-    public function get($name)
+    public function get($name): mixed
     {
         if (array_key_exists($name, $this->services)) {
             return $this->services[$name];
@@ -98,7 +99,9 @@ class Application implements RunableInterface, ContainerInterface
                 $options = $factory['options'] ?? [];
                 $factory = $factory['factory'];
             }
+
             $factory = new $factory($this, $options ?? []);
+
             $instance = $factory->createInstance();
             $this->services[$name] = $instance;
 
@@ -126,19 +129,23 @@ class Application implements RunableInterface, ContainerInterface
      */
     public function run()
     {
+        /** @var Logger $logger */
         $logger = $this->get(Logger::class);
         $logger->debug('Start application', [
             'test' => 'Hello'
         ]);
 
-        // Получаем инстанс сервиса роутера
+        /** Получаем инстанс сервиса роутера */
         $router = $this->get('router');
 
-        // Запускаем, собственно, роутинг.
-        // Роутер должен определить, есть ли вызов метода
+        /**
+         * Запускаем, собственно, роутинг.
+         *
+         * Роутер должен определить, есть ли вызов метода
+         */
         $action = $router->route();
 
-        // Если для запроса нет роутов, вернем 404
+        /** Если для запроса нет роутов, вернем 404 */
         if (!$action) {
             http_response_code(404);
             echo '404';

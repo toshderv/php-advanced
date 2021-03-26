@@ -11,7 +11,9 @@
     "minimum-stability": "dev",
     "require": {
         "psr/log": "^1.1@dev",
-        "ext-pdo": "*"
+        "ext-pdo": "*",
+        "phpdocumentor/phpdocumentor": "3.0.x-dev",
+        "symfony/flex": "1.12.x-dev"
     },
     "description": "",
     "autoload": {

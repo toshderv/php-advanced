@@ -1,23 +1,41 @@
 <?php
 
-
 namespace Logging;
 
-
+/**
+ * Interface RunableInterface
+ * Интерфейс для запуска приложения
+ *
+ * @package Logging
+ */
 class Logger extends \Psr\Log\AbstractLogger
 {
 
-    protected $writer;
+    /**
+     * @var WriterInterface
+     */
+    protected WriterInterface $writer;
 
-    protected $formatter;
+    /**
+     * @var FormatterInterface
+     */
+    protected FormatterInterface $formatter;
 
+    /**
+     * Logger constructor.
+     * @param WriterInterface $writer
+     * @param FormatterInterface $formatter
+     */
     public function __construct(WriterInterface $writer, FormatterInterface $formatter)
     {
         $this->writer = $writer;
         $this->formatter = $formatter;
     }
 
-    public function log($level, $message, array $context = array())
+    /**
+     * @inheritDoc
+     */
+    public function log($level, $message, $context = array())
     {
         $content = $this->formatter->format($level, $message, $context);
         $this->writer->write($content);

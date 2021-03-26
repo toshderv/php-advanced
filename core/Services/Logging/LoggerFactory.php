@@ -6,7 +6,10 @@ namespace Logging;
 
 class LoggerFactory extends \Core\Contracts\FactoryAbstract
 {
-    protected function createConcrete()
+    /**
+     * @return Logger
+     */
+    protected function createConcrete(): Logger
     {
         $writer = new \Logging\DbWriter();
         $formatter = new \Logging\JsonFormatter();

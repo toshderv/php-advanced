@@ -13,10 +13,21 @@ namespace Core\Contracts;
  */
 abstract class FactoryAbstract
 {
+    /**
+     * @var
+     */
     protected $app;
 
-    protected $options;
+    /**
+     * @var array
+     */
+    protected array $options;
 
+    /**
+     * FactoryAbstract constructor.
+     * @param $app
+     * @param array $options
+     */
     public function __construct($app, $options = [])
     {
         $this->app = $app;
@@ -28,7 +39,7 @@ abstract class FactoryAbstract
      *
      * @return mixed
      */
-    public function createInstance()
+    public function createInstance(): mixed
     {
         return $this->createConcrete();
     }

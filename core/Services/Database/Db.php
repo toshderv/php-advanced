@@ -6,15 +6,28 @@ namespace Core\Services\Database;
 
 class Db
 {
-    protected $pdo;
+    /**
+     * @var \PDO
+     */
+    protected \PDO $pdo;
 
+    /**
+     * Db constructor.
+     * @param $dsn
+     * @param $user
+     * @param $password
+     */
     public function __construct($dsn, $user, $password)
     {
-        // mysql:dbname=testdb;host=127.0.0.1
         $this->pdo = new \PDO($dsn, $user, $password);
     }
 
-    public function query(Query $query)
+    /**
+     * Return sql query result
+     * @param Query $query
+     * @return array
+     */
+    public function query(Query $query): array
     {
         $sql = $query->toSql();
         $result = $this->pdo->query($sql);

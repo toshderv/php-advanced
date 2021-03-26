@@ -14,7 +14,10 @@ use Core\Contracts\FactoryAbstract;
  */
 class RouterFactory extends FactoryAbstract
 {
-    protected function createConcrete()
+    /**
+     * @return Router
+     */
+    protected function createConcrete(): Router
     {
         return new Router();
     }
