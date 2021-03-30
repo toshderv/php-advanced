@@ -26,7 +26,7 @@ return [
             'options' => [
                 'dsn' => 'mysql:dbname=examples;host=127.0.0.1',
                 'user' => 'root',
-                'password' => '1q2w3e'
+                'password' => 'TBk3GGfzus3!NTy'
             ]
         ]
     ],

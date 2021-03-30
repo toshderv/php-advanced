@@ -25,14 +25,14 @@ class IndexController
      */
     public function index(): void
     {
-        /** @var TYPE_NAME $logger */
+        /** @var Logger $logger */
         $logger = Application::getInstance()->get(Logger::class);
         $logger->debug('Start index method');
 
 
-        /** @var Db $db */
-        $db = Application::getInstance()->get(Db::class);
-        $db->query();
+//        /** @var Db $db */
+//        $db = Application::getInstance()->get(Db::class);
+//        $db->query();
 
         echo 'Run index method index controller';
     }
