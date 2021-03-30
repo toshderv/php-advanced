@@ -8,6 +8,9 @@ use Core\Contracts\ContainerInterface;
 use Core\Contracts\FactoryAbstract;
 use Core\Contracts\RouterInterface;
 use Core\Contracts\RunableInterface;
+use Core\Exceptions\HttpException;
+use Core\Exceptions\PageNotFoundException;
+use Core\Services\Routing\Router;
 use Logging\Logger;
 
 /**
@@ -125,6 +128,7 @@ class Application implements RunableInterface, ContainerInterface
      * Запуск обработки запроса
      * В дальнейшем обраотку запросов модифицируем с применение стандарта PSR-15
      *
+     * @throws \Exception
      * @todo Сделать обработку запросов по спецификации PSR-15
      */
     public function run()
@@ -135,20 +139,20 @@ class Application implements RunableInterface, ContainerInterface
             'test' => 'Hello'
         ]);
 
-        /** Получаем инстанс сервиса роутера */
+        /** @var Router $router Получаем инстанс сервиса роутера */
         $router = $this->get('router');
 
-        /**
-         * Запускаем, собственно, роутинг.
-         *
-         * Роутер должен определить, есть ли вызов метода
-         */
-        $action = $router->route();
-
-        /** Если для запроса нет роутов, вернем 404 */
-        if (!$action) {
-            http_response_code(404);
-            echo '404';
+        try {
+            /**
+             * Запускаем, собственно, роутинг.
+             *
+             * Роутер должен определить, есть ли вызов метода
+             * @throws HttpException
+             */
+            $action = $router->route();
+        } catch (HttpException $exception) {
+            http_response_code($exception->getCode());
+            echo $exception->getMessage();
             return;
         }
 

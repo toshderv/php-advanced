@@ -5,6 +5,8 @@ namespace Core\Services\Routing;
 
 
 use Core\Contracts\RouterInterface;
+use Core\Exceptions\HttpException;
+use Core\Exceptions\PageNotFoundException;
 
 /**
  * Class Router
@@ -56,7 +58,7 @@ class Router implements RouterInterface
         // Получаем метод и путь запроса и проверяем есть ли для него сконфигурированный роут
         $method = $_SERVER['REQUEST_METHOD'];
         $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-        $action = $this->routes[$method][$path] ?? null;
+        $action = $this->routes[$method][$path] ?? null/*throw new HttpException()*/;
         // Если роут есть, возвращаем колбек функцию, вызывающию соответствующий роут
         if ($action && is_callable($action)) {
             return function() use ($method, $path) {
@@ -64,6 +66,6 @@ class Router implements RouterInterface
             };
         }
 
-        throw new \Exception('Can not define route');
+        throw new PageNotFoundException();
     }
 }
