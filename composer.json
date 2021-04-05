@@ -1,21 +1,22 @@
 {
-    "name": "aigletter/oop-advanced",
-    "authors": [
-        {
-            "name": "aigletter",
-            "email": "aigletter@gmail.com"
-        }
-    ],
-    "require": {
-      "ext-json": "*"
-    },
-    "description": "",
-    "autoload": {
-        "psr-4": {
-            "Oop\\": "oop",
-            "Patterns\\": "patterns",
-            "Reflection\\": "reflection",
-            "Solving\\": "solving"
-        }
+  "name": "aigletter/oop-advanced",
+  "authors": [
+    {
+      "name": "aigletter",
+      "email": "aigletter@gmail.com"
     }
+  ],
+  "require": {
+    "ext-json": "*",
+    "ext-pdo": "*"
+  },
+  "description": "",
+  "autoload": {
+    "psr-4": {
+      "Oop\\": "oop",
+      "Patterns\\": "patterns",
+      "Reflection\\": "reflection",
+      "Solving\\": "solving"
+    }
+  }
 }
