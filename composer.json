@@ -1,26 +1,21 @@
 {
-    "name": "aigletter/mvc-project",
-    "type": "project",
-    "license": "MIT",
+    "name": "aigletter/oop-advanced",
     "authors": [
         {
             "name": "aigletter",
             "email": "aigletter@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
-        "psr/log": "^1.1@dev",
-        "ext-pdo": "*",
-        "phpdocumentor/phpdocumentor": "3.0.x-dev",
-        "symfony/flex": "1.12.x-dev"
+      "ext-json": "*"
     },
     "description": "",
     "autoload": {
         "psr-4": {
-            "Core\\": "core",
-            "App\\": "app",
-            "Logging\\": "core/Services/Logging"
+            "Oop\\": "oop",
+            "Patterns\\": "patterns",
+            "Reflection\\": "reflection",
+            "Solving\\": "solving"
         }
     }
 }
